@@ -10,6 +10,7 @@ public class Event {
 	private int maxCapacity;
 	private boolean status; // open or closed
 	
+	@SuppressWarnings("serial")
 	public Event()
 	{
 		uniqueId = 0;
