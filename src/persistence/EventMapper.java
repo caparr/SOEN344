@@ -24,11 +24,12 @@ public class EventMapper {
 			while (resultSet.next()) {				
 				int uniqueId = resultSet.getInt("id");
 				int eventType = resultSet.getInt("eventType");
-				int hall = resultSet.getInt("hall");				
+				int hall = resultSet.getInt("hall");
+				int showing = resultSet.getInt("showing");
 				boolean status = resultSet.getBoolean("status");				
 				Date date = resultSet.getDate("date");
 				String title = resultSet.getString("title");				
-				Event resultEvent = new Event(uniqueId, eventType, hall, status, date, title);
+				Event resultEvent = new Event(uniqueId, eventType, hall, showing, status, date, title);
 				
 				results.add(resultEvent);				
 			}

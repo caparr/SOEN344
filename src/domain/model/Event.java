@@ -6,19 +6,21 @@ public class Event {
 
 	private int uniqueId;
 	private int eventType;
-	private int hall;	
+	private int hall;
+	private int showing;
 	
 	private boolean status; // open or closed
 	
 	private Date date;
 	private String title;	
 	
-	public Event(int uniqueId, int eventType, int hall, boolean status, 
-			Date date, String title) {
+	public Event(int uniqueId, int eventType, int hall, int showing,
+			boolean status,	Date date, String title) {
 		super();
 		this.uniqueId = uniqueId;
 		this.eventType = eventType;
-		this.hall = hall;		
+		this.hall = hall;
+		this.showing = showing;
 		this.status = status;
 		this.date = date;
 		this.title = title;
@@ -41,6 +43,12 @@ public class Event {
 	}
 	public void setHall(int hall) {
 		this.hall = hall;
+	}
+	public int getShowing() {
+		return showing;
+	}
+	public void setShowing(int showing) {
+		this.showing = showing;
 	}
 	public boolean isStatus() {
 		return status;

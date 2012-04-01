@@ -32,6 +32,7 @@ public class Catalog {
 			System.out.print(e.getTitle() + " ");
 			System.out.print(e.getDate() + " ");
 			System.out.print(e.getHall() + " ");
+			System.out.print(e.getShowing() + " ");
 			System.out.println(e.getEventType());
 		}
 		

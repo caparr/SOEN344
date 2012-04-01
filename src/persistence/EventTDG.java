@@ -34,8 +34,8 @@ public class EventTDG {
 	public static void insert() {
 		PreparedStatement ps = null;
 			
-		String query = "INSERT INTO event (title, status, date, eventType, hall) " +
-				"values (?, ?, ?, ?, ?)";
+		String query = "INSERT INTO event (title, status, date, eventType, hall, showing) " +
+				"values (?, ?, ?, ?, ?, ?)";
 
 		try {
 			ps = DBRegistry.getInstance().getConnection().prepareStatement(query);
@@ -44,6 +44,7 @@ public class EventTDG {
 			ps.setDate(3, java.sql.Date.valueOf("2012-04-30"));
 			ps.setInt(4, 1); // eventType
 			ps.setInt(5, 1); // hall
+			ps.setInt(6, 1); // showing
 			ps.executeUpdate();			
 		}
 		catch (Exception e) {
