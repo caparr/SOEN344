@@ -94,5 +94,22 @@ public class TicketTDG {
 		return isAvailable;		
 		
 	}
+	
+	public static ResultSet find(int eventId) {
+		PreparedStatement ps = null;
+		ResultSet resultSet = null;	
+		String query = "SELECT * FROM TICKET WHERE eventId = ?";	
+		
+		try {
+			ps = DBRegistry.getInstance().getConnection().prepareStatement(query);
+			ps.setInt(1, eventId);
+			resultSet = ps.executeQuery();			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resultSet;
+	}
 
 }

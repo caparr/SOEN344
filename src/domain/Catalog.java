@@ -57,6 +57,23 @@ public class Catalog {
 		}
 	}
 	
+	public void viewAllTicketsForEvent(int eventId) {
+		List<Ticket> tickets = TicketMapper.find(search(eventId));
+		
+		System.out.println("Ticket List");
+		System.out.println("======================================================================================");
+		System.out.println("FirstName\t\tLast Name\t\tNumber Of Seats ");
+		for (Ticket t: tickets) {
+			System.out.print(t.getFirstName() + "\t\t\t");			
+			System.out.print(t.getLastName() + "\t\t\t");			
+			System.out.println(t.getNumberOfSeats());
+		}
+		
+	}
+	
+	
+	// HELPERS
+	
 	public Event search(int eventId) {
 		Event e = null;
 		for(Event er: eventRepository) {

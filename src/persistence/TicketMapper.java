@@ -1,6 +1,11 @@
 package persistence;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import domain.model.Event;
 import domain.model.Ticket;
 
 
@@ -20,8 +25,7 @@ public class TicketMapper {
 	 * @return
 	 */
 	public static synchronized boolean insert (Ticket t) {
-		
-		
+			
 		String firstName = t.getFirstName();
 		String lastName = t.getLastName();
 		int eventId = t.getEvent().getUniqueId();
@@ -39,4 +43,28 @@ public class TicketMapper {
 		
 		return isSuccessful;
 	}
+	
+	public static synchronized List<Ticket> find(Event event) {
+		List<Ticket> tickets = map(event, TicketTDG.find(event.getUniqueId()));
+		return tickets;
+	}
+	
+	public static List<Ticket> map(Event event, ResultSet resultSet) {
+		ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+		try {
+			while (resultSet.next()) {
+				String firstName = resultSet.getString("firstName");
+				String lastName = resultSet.getString("lastName");				
+				int numberOfSeats = resultSet.getInt("numberOfSeats");
+				Ticket t = new Ticket(firstName, lastName, event, numberOfSeats);
+				tickets.add(t);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}		
+		
+		return tickets;		
+	}
+	
 }
