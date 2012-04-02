@@ -53,7 +53,7 @@ public class Catalog {
 			System.out.println("Succesfully booked tickets to " + search(t.getEvent().getUniqueId()).getTitle() + " for " + t.getFirstName() + " " + t.getLastName());
 		}
 		else {
-			System.out.println("Rejected");
+			System.out.println("Could not book tickets for " + t.getFirstName() + " " + t.getLastName());
 		}
 	}
 	
