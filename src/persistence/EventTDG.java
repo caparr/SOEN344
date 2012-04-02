@@ -2,7 +2,12 @@ package persistence;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
+/**
+ * @author Matthew Tam
+ * Handles all the persistent logic regarding Event
+ */
 public class EventTDG {
 	
 	
@@ -21,7 +26,7 @@ public class EventTDG {
 			resultSet = ps.executeQuery();			
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		
 		return resultSet;
@@ -34,8 +39,8 @@ public class EventTDG {
 	public static void insert() {
 		PreparedStatement ps = null;
 			
-		String query = "INSERT INTO event (title, status, date, eventType, hall, showing) " +
-				"values (?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO event (title, status, date, eventType, hall, showing, numberOfSeats) " +
+				"values (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			ps = DBRegistry.getInstance().getConnection().prepareStatement(query);
@@ -45,12 +50,35 @@ public class EventTDG {
 			ps.setInt(4, 1); // eventType
 			ps.setInt(5, 1); // hall
 			ps.setInt(6, 1); // showing
+			ps.setInt(7, getNumberOfSeats(1));
 			ps.executeUpdate();			
 		}
 		catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		
+	}
+	
+	/**
+	 * Hardcoded seats available in the event based on which hall they're at
+	 * @return seatsAvailable
+	 */
+	private static int getNumberOfSeats(int numberOfSeats) {
+		int seatsAvailable;
+		
+		switch (numberOfSeats) {
+			case 1:
+				seatsAvailable = 10;
+				break;
+			case 2:
+				seatsAvailable = 5;
+				break;
+			default:
+				seatsAvailable = 0;
+				break;	
+		}
+		
+		return seatsAvailable;
 	}
 
 }

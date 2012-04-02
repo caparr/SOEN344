@@ -2,19 +2,16 @@ package persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DBRegistry {
 
 	private static DBRegistry registry = null;
 	private Connection connection = null;	
 	
-	private DBRegistry() {
+	private DBRegistry() {	
 		this.connect();
-	}
-	
+	}	
 	
 	/**
 	 * Returns the <code>DBRegistry</code> instance with a connection to the database.
@@ -28,13 +25,13 @@ public class DBRegistry {
 		return registry;
 	}
 	
-	private boolean connect() {
+	public boolean connect() {
 		try {
 			Class.forName("org.sqlite.JDBC").newInstance();
 			connection = DriverManager.getConnection("jdbc:sqlite:soen344.db");		
 		}
 		catch(Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		
 		return true;

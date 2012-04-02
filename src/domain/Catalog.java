@@ -3,11 +3,16 @@ package domain;
 import java.util.List;
 
 import persistence.EventMapper;
-
+import persistence.TicketMapper;
 import domain.model.Event;
+import domain.model.Ticket;
 
 
-//Stores Events
+
+/**
+ * @author Matthew Tam
+ * Catalog that maintains the list of events. Also allows clients to book tickets to events
+ */
 public class Catalog {
 	
 	private List<Event> eventRepository;
@@ -26,17 +31,40 @@ public class Catalog {
 	
 	public void viewAllEvents() {		
 		System.out.println("Event List");
-		System.out.println("====================================================================");		
+		System.out.println("======================================================================================");
+		System.out.println("Unique ID | Date 	| Hall | Showing | Number Of Seats | Event Type | Title ");
 		for (Event e: eventRepository) {
-			System.out.print(e.getUniqueId() + " ");
-			System.out.print(e.getTitle() + " ");
-			System.out.print(e.getDate() + " ");
-			System.out.print(e.getHall() + " ");
-			System.out.print(e.getShowing() + " ");
-			System.out.println(e.getEventType());
+			System.out.print(e.getUniqueId() + "	    ");			
+			System.out.print(e.getDate() + " 	    ");
+			System.out.print(e.getHall() + " 	   ");
+			System.out.print(e.getShowing() + " 	        ");
+			System.out.print(e.getNumberOfSeats() + "	          ");
+			System.out.print(e.getEventType() + "       ");
+			System.out.println(e.getTitle());
 		}
 		
-		System.out.println("====================================================================");
+		System.out.println("======================================================================================");
 	}
 
+	public void bookTicket(Ticket t) {
+		boolean isSuccessful = TicketMapper.insert(t);
+		
+		if(isSuccessful) {
+			System.out.println("Succesfully booked tickets to " + search(t.getEvent().getUniqueId()).getTitle() + " for " + t.getFirstName() + " " + t.getLastName());
+		}
+		else {
+			System.out.println("Rejected");
+		}
+	}
+	
+	public Event search(int eventId) {
+		Event e = null;
+		for(Event er: eventRepository) {
+			if (er.getUniqueId() == eventId) {
+				e = er;
+				break;
+			}			
+		}
+		return e;
+	}
 }

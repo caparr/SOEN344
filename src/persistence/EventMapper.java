@@ -11,7 +11,7 @@ import domain.model.Event;
 
 public class EventMapper {
 	
-	public static List<Event> findAll() {		
+	public static synchronized List<Event> findAll() {
 		List<Event> events = map(EventTDG.findAll());		
 		return events;
 	}
@@ -26,17 +26,22 @@ public class EventMapper {
 				int eventType = resultSet.getInt("eventType");
 				int hall = resultSet.getInt("hall");
 				int showing = resultSet.getInt("showing");
+				int numberOfSeats = resultSet.getInt("numberOfSeats");
 				boolean status = resultSet.getBoolean("status");				
 				Date date = resultSet.getDate("date");
 				String title = resultSet.getString("title");				
-				Event resultEvent = new Event(uniqueId, eventType, hall, showing, status, date, title);
+				Event resultEvent = new Event(uniqueId, eventType, hall, showing, numberOfSeats, status, date, title);
 				
 				results.add(resultEvent);				
 			}
+			resultSet.close();
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return results;
 	}
+	
+	
 }
