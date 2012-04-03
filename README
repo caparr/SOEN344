@@ -1,7 +1,7 @@
-when running my project, the sqlitejdbc-v056.jar needs to be re-added. Here are instructions on how to do so:
+When running my project, the sqlitejdbc-v056.jar needs to be re-added. Here are instructions on how to do so:
 
 1.	Right click on the project
-2.	Go to Build Path ? Configure Build Path
+2.	Go to Build Path -> Configure Build Path
 3.	Click on sqlitejdbc-v056.jar and “Remove” it
 4.	Click “Add External JARs” and add sqlitejdbc-v056.jar
 5.	Press OK. 
